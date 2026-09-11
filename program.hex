@@ -1,8 +1,4 @@
 // Test program for single-cycle RISC-V core.
-// NOTE: imem now indexes by addr[31:2] (word address), so this file loads
-// sequentially into word indices 0,1,2,... which lines up 1:1 with PC/4
-// since every instruction is 4 bytes. No @ directives needed.
-//
 // x1 = mem[0]        (lw x1, 0(x0))
 // x2 = mem[4]        (lw x2, 4(x0))
 // x3 = x1 + x2       (add x3, x1, x2)
@@ -11,7 +7,7 @@
 // x4 = x1 + x2       (SKIPPED)
 // x5 = x3 + x3       (add x5, x3, x3)
 //
-// I-type ALU exercise (addi/ori/andi), starting right after the branch target:
+// I-type ALU (addi/ori/andi), starting right after the branch target:
 // x10 = 5                (addi x10, x0, 5)
 // x11 = 3                (addi x11, x0, 3)
 // x12 = x10 | 8  = 13    (ori  x12, x10, 8)
