@@ -90,3 +90,18 @@ RISC-V instructions are only 32 bits wide, so a full 32-bit constant won't fit i
 
 ---
 
+## Testbench Results
+
+<img width="2367" height="426" alt="image" src="https://github.com/user-attachments/assets/20956441-7a3e-4313-a10b-79d001c610ea" />
+
+Things I checked for these results:
+
+- **PC_top** increments by 4 every cycle except on a taken branch/jal, where it should jump to **PC + immExt** instead.
+- **instruction_top** at each PC should match the hex value at that word index in program.hex
+- Control signals should match the opcode: e.g. **regWrite_top=1** only for **R-type/I-type/lw/jal/lui/auipc**, **memWrite_top=1** only for **sw, branch_top=1** only for branches.
+- Register writes (visible as write_data_top combined with regWrite_top=1) should only "commit" at the rising edge of clk, the value should already be stable just before that edge, not still settling.
+
+
+---
+
+
